@@ -16,3 +16,26 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+/*
+ * CRUD for job result
+ * 
+ */
+Route::get('job/{id}', 'Jobs\JobController@show');
+
+Route::middleware('auth:api', 'throttle:10|60,1')->group(
+    function () {
+        Route::post('job', function (Request $request) {
+            return "Not implemented yets";
+        });
+
+        Route::put('job', function (Request $request) {
+            return "Not implemented yet";
+        });
+
+        Route::delete('job', function (Request $request) {
+            return "Not implemented yet";
+        });
+    }
+);
