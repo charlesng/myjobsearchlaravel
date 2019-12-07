@@ -2,10 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
-class MyComposerServiceProvider extends ServiceProvider implements DeferrableProvider
+class MyComposerServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
@@ -21,11 +20,4 @@ class MyComposerServiceProvider extends ServiceProvider implements DeferrablePro
 
     public function register()
     { }
-
-    public function provides()
-    {
-        
-    }
-
-    
 }
