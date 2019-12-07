@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Resources\Job as JobResource;
+use App\Http\Resources\JobsCollection;
+use App\Job;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,20 +25,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  * CRUD for job result
  * 
  */
-Route::get('job/{id}', 'Jobs\JobController@show');
-
-Route::middleware('auth:api', 'throttle:10|60,1')->group(
-    function () {
-        Route::post('job', function (Request $request) {
-            return "Not implemented yets";
-        });
-
-        Route::put('job', function (Request $request) {
-            return "Not implemented yet";
-        });
-
-        Route::delete('job', function (Request $request) {
-            return "Not implemented yet";
-        });
-    }
-);
+Route::apiResource('jobs','JobController');

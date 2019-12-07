@@ -15,8 +15,18 @@ class CreateJobsTable extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('title');
+            $table->string('description');
+            $table->string('company_name');
             $table->timestamps();
         });
+        DB::table('jobs')->insert(
+            array(
+                'title' => 'Internship for software engineering',
+                'description' => 'Find someone for internship',
+                'company_name' => 'JobVector'
+            )
+        );
     }
 
     /**

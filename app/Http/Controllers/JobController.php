@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\JobsCollection;
+use App\Http\Resources\Job as JobsResources;
+use App\Job;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -13,7 +16,7 @@ class JobController extends Controller
      */
     public function index()
     {
-        //
+        return new JobsCollection(Job::paginate());
     }
 
     /**
@@ -34,7 +37,12 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $job = new Job();
+        $job->title = $request->title;
+        $job->description = $request->description;
+        $job->company_name = $request->company_name;
+        $job->save();
+        return new JobsResources($job);
     }
 
     /**
@@ -45,7 +53,7 @@ class JobController extends Controller
      */
     public function show($id)
     {
-        //
+        return new JobsResources(Job::findOrFail($id));
     }
 
     /**
@@ -68,7 +76,12 @@ class JobController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $job = Job::findOrFail($id);
+        $job->title = $request->has('title') ? $request->title : $job->title;
+        $job->description = $request->has('description') ? $request->description : $job->description;
+        $job->company_name = $request->has('company_name') ? $request->company_name : $job->company_name;
+        $job->save();
+        return new JobsResources($job);
     }
 
     /**
@@ -79,6 +92,8 @@ class JobController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $job = Job::findOrFail($id);
+        $job->delete();
+        return new JobsResources($job);
     }
 }
