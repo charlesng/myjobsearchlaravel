@@ -7,12 +7,26 @@ use App\Http\Resources\Job as JobsResources;
 use App\Job;
 use Illuminate\Http\Request;
 
+/**
+ * @OA\Info(title="API", version="0.0.1")
+ **/
+
+
 class JobController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Get(
+     *      path="/jobs",
+     * @OA\Response(
+     *          response=200,
+     *          description="successful operation"
+     *       ),
+     *     )
      */
     public function index()
     {
@@ -35,6 +49,15 @@ class JobController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Post(
+     *      path="/jobs",
+     *       @OA\Response(
+     *          response=200,
+     *          description="successful operation"
+     *       ),
+     *     )
+     */
     public function store(Request $request)
     {
         $job = new Job();
@@ -50,6 +73,25 @@ class JobController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Get(
+     *      path="/jobs/{id}",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Job id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *       @OA\Response(
+     *          response=200,
+     *          description="successful operation"
+     *       ),
+     * 
+     *     )
      */
     public function show($id)
     {
@@ -74,6 +116,25 @@ class JobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Put(
+     *      path="/jobs/{id}",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Job id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *       @OA\Response(
+     *          response=200,
+     *          description="successful operation"
+     *       ),
+     * 
+     *     )
+     */
     public function update(Request $request, $id)
     {
         $job = Job::findOrFail($id);
@@ -89,6 +150,24 @@ class JobController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Delete(
+     *      path="/jobs/{id}",
+     *            @OA\Parameter(
+     *          name="id",
+     *          description="Job id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation"
+     *       ),
+     *     )
      */
     public function destroy($id)
     {
