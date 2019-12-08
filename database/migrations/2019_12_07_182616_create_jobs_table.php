@@ -20,13 +20,6 @@ class CreateJobsTable extends Migration
             $table->string('company_name');
             $table->timestamps();
         });
-        DB::table('jobs')->insert(
-            array(
-                'title' => 'Internship for software engineering',
-                'description' => 'Find someone for internship',
-                'company_name' => 'JobVector'
-            )
-        );
     }
 
     /**
