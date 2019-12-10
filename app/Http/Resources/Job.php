@@ -18,8 +18,11 @@ class Job extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'company_name' => $this->company_name
-
+            'company_name' => $this->company_name,
+            'location' => $this->location,
+            'img_src' => $this->img_src,
+            'salary' => $this->salary,
+            'salary_period' => $this->salary_period
         ];
     }
 }
