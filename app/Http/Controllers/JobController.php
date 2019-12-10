@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Resources\JobsCollection;
 use App\Http\Resources\Job as JobsResources;
 use App\Job;
+use App\Repositories\BaseJobRepository;
+use App\Repositories\JobRepository;
+use App\Repositories\ORMJobRepository;
 use Illuminate\Http\Request;
 
 /**
@@ -21,11 +24,19 @@ use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
+
+    private $repo;
+    public function __construct(BaseJobRepository $repo)
+    {
+        $this->repo = $repo;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     /**
      * @OA\Get(
      *      path="/jobs",
@@ -71,7 +82,7 @@ class JobController extends Controller
         $job->title = $request->title;
         $job->description = $request->description;
         $job->company_name = $request->company_name;
-        $job->save();
+        $this->repo->save($job);
         return new JobsResources($job);
     }
 
@@ -144,11 +155,11 @@ class JobController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $job = Job::findOrFail($id);
+        $job = $this->repo->find($id);
         $job->title = $request->has('title') ? $request->title : $job->title;
         $job->description = $request->has('description') ? $request->description : $job->description;
         $job->company_name = $request->has('company_name') ? $request->company_name : $job->company_name;
-        $job->save();
+        $this->repo->save($job);
         return new JobsResources($job);
     }
 
@@ -178,8 +189,8 @@ class JobController extends Controller
      */
     public function destroy($id)
     {
-        $job = Job::findOrFail($id);
-        $job->delete();
+        $job = $this->repo->find($id);
+        $this->repo->delete($id);
         return new JobsResources($job);
     }
 }

@@ -9,7 +9,7 @@
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "test": "phpunit tests --color",
-        "test:watch": "watch 'npm run --silent test' app tests"
+        "test:watch": "watch 'npm run --silent test' app tests config"
     },
     "devDependencies": {
         "axios": "^0.19",
