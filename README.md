@@ -14,6 +14,7 @@ This is the project for learning PHP. Here is the things implemeented.
 -   Homestead
 -   Swagger UI
 -   Basic CRUD for Job Controller
+-   Simple Unit Test for Database and Restful API call (run cmd `phpunit` )
 
 ## DB Migration
 

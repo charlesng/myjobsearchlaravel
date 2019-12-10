@@ -15,10 +15,10 @@ class AddJobColumn extends Migration
     {
         //
         Schema::table('jobs', function (Blueprint $table) {
-            $table->string('location');
-            $table->string('img_src');
-            $table->string('salary');
-            $table->enum('salary_period', ['Yearly', 'Monthly']);
+            $table->string('location')->default('');
+            $table->string('img_src')->default('');
+            $table->string('salary')->default('');
+            $table->enum('salary_period', ['Yearly', 'Monthly'])->default('Yearly');
         });
     }
 

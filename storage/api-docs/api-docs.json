@@ -61,9 +61,7 @@
                         "description": "successful operation"
                     }
                 }
-            }
-        },
-        "/job3s/{id}": {
+            },
             "delete": {
                 "operationId": "App\\Http\\Controllers\\JobController::destroy",
                 "parameters": [
