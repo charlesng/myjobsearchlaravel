@@ -11,6 +11,13 @@ use Illuminate\Http\Request;
  * @OA\Info(title="API", version="0.0.1")
  **/
 
+/**
+ *  @OA\Server(
+ *      url="http://myjobsearch/api/",
+ *      description="L5 Swagger OpenApi Server"
+ * )
+ */
+
 
 class JobController extends Controller
 {

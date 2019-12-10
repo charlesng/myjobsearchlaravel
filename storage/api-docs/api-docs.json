@@ -4,6 +4,12 @@
         "title": "API",
         "version": "0.0.1"
     },
+    "servers": [
+        {
+            "url": "http://myjobsearch/api/",
+            "description": "L5 Swagger OpenApi Server"
+        }
+    ],
     "paths": {
         "/jobs": {
             "get": {
