@@ -11,7 +11,7 @@
 
 This is the project for learning PHP. Here is the things implemeented.
 
--   Homestead
+-   Homestead (Please reference the Homestead.yaml.exampl, you might need to modify the path)
 -   Swagger UI
 -   Basic CRUD for Job Controller
 -   Simple Unit Test for Database and Restful API call (run cmd `phpunit` ), Add cmd `npm run test:watch` to run test automatically when file in folder 'app' and 'tests' is saved.

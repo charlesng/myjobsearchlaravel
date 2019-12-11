@@ -1,0 +1,21 @@
+ip: 192.168.10.10
+memory: 2048
+cpus: 2
+provider: virtualbox
+authorize: ~/.ssh/laravel.pub
+keys:
+  - ~/.ssh/laravel
+folders:
+  - map: ${your_directory}/myjobsearchlaravel
+    to: /home/vagrant/code
+sites:
+  - map: myjobsearch
+    to: /home/vagrant/code/public
+databases:
+  - homestead
+features:
+  - mariadb: false
+  - ohmyzsh: false
+  - webdriver: false
+name: myjobsearchlaravel
+hostname: myjobsearchlaravel
