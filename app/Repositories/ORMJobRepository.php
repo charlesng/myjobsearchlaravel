@@ -11,15 +11,20 @@ class ORMJobRepository implements BaseJobRepository
         $job->save();
         return $job;
     }
-    public function find($id): Job
+    public function find(int $id): Job
     {
         $job = Job::findOrFail($id);
         return $job;
     }
-    public function delete($id): Job
+    public function delete(int $id): Job
     {
         $job = Job::findOrFail($id);
         $job->delete();
         return $job;
+    }
+
+    public function paginate()
+    {
+        return Job::paginate();
     }
 }

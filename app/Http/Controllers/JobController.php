@@ -48,7 +48,7 @@ class JobController extends Controller
      */
     public function index()
     {
-        return new JobsCollection(Job::paginate());
+        return new JobsCollection($this->repo->paginate());
     }
 
     /**
@@ -113,7 +113,7 @@ class JobController extends Controller
      */
     public function show($id)
     {
-        return new JobsResources(Job::findOrFail($id));
+        return new JobsResources($this->repo->find($id));
     }
 
     /**

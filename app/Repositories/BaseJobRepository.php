@@ -7,6 +7,7 @@ use App\Job;
 interface BaseJobRepository
 {
     public function save(Job $job): Job;
-    public function find(Integers $id): Job;
-    public function delete(Integers $id): Job;
+    public function find(int $id): Job;
+    public function delete(int $id): Job;
+    public function paginate();
 }
