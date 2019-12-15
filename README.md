@@ -22,12 +22,15 @@ This is the project for learning PHP. Here is the things implemeented.
 -   Run `php artisan migrate:fresh` to run all the migration
 -   Run `php artisan db:seed` to preload all the data
 
-## Debug
+## Debug and Code Coverage
 
 -   It used `XDebug` with VSCode to do debugging. Please refer to the documentation and tutorial
     https://tighten.co/blog/configure-vscode-to-debug-phpunit-tests-with-xdebug
     https://laracasts.com/series/visual-studio-code-for-php-developers/episodes/13
     https://xdebug.org/docs/install
+
+-   Add cmd `npm run test:coverage` to generate the code coverage report. You can find the generated report under the folder `report` under the root project
+    <img src="https://user-images.githubusercontent.com/5112837/70862251-235bbb80-1f3a-11ea-9a4a-fadf21aba78b.png" >
 
 ## About Laravel
 
