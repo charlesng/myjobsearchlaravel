@@ -22,6 +22,13 @@ This is the project for learning PHP. Here is the things implemeented.
 -   Run `php artisan migrate:fresh` to run all the migration
 -   Run `php artisan db:seed` to preload all the data
 
+## Debug
+
+-   It used `XDebug` with VSCode to do debugging. Please refer to the documentation and tutorial
+    https://tighten.co/blog/configure-vscode-to-debug-phpunit-tests-with-xdebug
+    https://laracasts.com/series/visual-studio-code-for-php-developers/episodes/13
+    https://xdebug.org/docs/install
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
