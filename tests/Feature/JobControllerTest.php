@@ -2,7 +2,6 @@
 
 namespace Tests\Unit;
 
-use App\Http\Controllers\JobController;
 use App\Job;
 use App\Repositories\BaseJobRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -13,13 +12,21 @@ class JobControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * @var string
+     */
     private $table = 'jobs';
+    /**
+     * @var array
+     */
     private $jobs;
+    /**
+     * @var Job
+     */
     private $postJob;
     /**
-     * @var JobController
+     * @var BaseJobRepository
      */
-    private $controller;
     private $mockRepo;
 
     protected function setUp(): void
@@ -29,28 +36,28 @@ class JobControllerTest extends TestCase
         $this->app->instance('App\Repositories\BaseJobRepository', $this->mockRepo);
     }
 
-    public function testGetAllJobReq()
+    public function testGetAllJobReq(): void
     {
         $this->givenJobsCreated(2);
         $this->whenAllJobFound();
         $this->thenJobFetchSuccess(2);
     }
 
-    public function testGetOneJobReq()
+    public function testGetOneJobReq(): void
     {
         $this->givenJobsCreated(2);
         $this->whenOneJobFound(0);
         $this->thenOneJobIsFetchSuccess(0);
     }
 
-    public function testOneJobPost()
+    public function testOneJobPost(): void
     {
         $this->givenOnePostJob();
         $this->whenJobIsSave();
         $this->thenOnePostJobReqSucccess();
     }
 
-    public function testOneJobUpdate()
+    public function testOneJobUpdate(): void
     {
         $newTitle = 'Android Developer';
         $this->givenJobsCreated(1);
@@ -58,27 +65,27 @@ class JobControllerTest extends TestCase
         $this->thenOneJobUpdateSuccess($this->jobs[0]->id, $newTitle);
     }
 
-    public function testOneJobDelete()
+    public function testOneJobDelete(): void
     {
         $this->givenJobsCreated(1);
         $this->whenOneJobDeleteReq($this->jobs[0]->id);
         $this->thenOneJobDeleteSuccess($this->jobs[0]->id);
     }
 
-    private function thenOneJobDeleteSuccess($id)
+    private function thenOneJobDeleteSuccess(int $id): void
     {
         $this->delete('/api/jobs/' . $id)
             ->assertStatus(200);
     }
 
-    private function whenOneJobDeleteReq($id)
+    private function whenOneJobDeleteReq(int $id): void
     {
         $this->mockRepo->shouldReceive('find')->with($id)->andReturn($this->jobs[$id])->once();
         $this->mockRepo->shouldReceive('delete')
             ->with($id)->once();
     }
 
-    private function thenOneJobUpdateSuccess($id, $title)
+    private function thenOneJobUpdateSuccess(int $id, string $title): void
     {
         $this->put(
             '/api/jobs/' . $id,
@@ -88,24 +95,24 @@ class JobControllerTest extends TestCase
         )->assertStatus(200);
     }
 
-    private function whenOneJobUpdateReq($id)
+    private function whenOneJobUpdateReq(int $id): void
     {
         $this->mockRepo->shouldReceive('find')->with($id)->andReturn($this->jobs[0])->once();
         $this->mockRepo->shouldReceive('save')->once();
     }
 
 
-    private function givenOnePostJob()
+    private function givenOnePostJob(): void
     {
         $this->postJob = (factory(Job::class, 1)->make())[0];
     }
 
-    private function whenJobIsSave()
+    private function whenJobIsSave(): void
     {
         $this->mockRepo->shouldReceive('save')->once();
     }
 
-    private function thenOnePostJobReqSucccess()
+    private function thenOnePostJobReqSucccess(): void
     {
         $this->post(
             '/api/jobs',
@@ -117,7 +124,7 @@ class JobControllerTest extends TestCase
         )->assertStatus(200);
     }
 
-    private function givenJobsCreated($count)
+    private function givenJobsCreated(int $count): void
     {
         $this->jobs = factory(Job::class, $count)->make();
         for ($i = 0; $i < $count; $i++) {
@@ -125,22 +132,22 @@ class JobControllerTest extends TestCase
         }
     }
 
-    private function whenOneJobFound($id)
+    private function whenOneJobFound(int $id): void
     {
         $this->mockRepo->shouldReceive('find')->with($id)->andReturn($this->jobs[$id])->once();
     }
 
-    private function whenAllJobFound()
+    private function whenAllJobFound(): void
     {
         $this->mockRepo->shouldReceive('paginate')->andReturn($this->jobs)->once();
     }
 
-    private function thenJobFetchSuccess($count)
+    private function thenJobFetchSuccess(int $count): void
     {
         $this->get('/api/jobs')->assertStatus(200)->assertJsonCount($count, 'data');
     }
 
-    private function thenOneJobIsFetchSuccess($id)
+    private function thenOneJobIsFetchSuccess(int $id): void
     {
         $this->get('/api/jobs/' . $id)->assertStatus(200)
             ->assertJson(['data' => ['title' => $this->jobs[$id]->title]]);

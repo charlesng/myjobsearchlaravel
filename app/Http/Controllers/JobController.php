@@ -6,25 +6,22 @@ use App\Http\Resources\JobsCollection;
 use App\Http\Resources\Job as JobsResources;
 use App\Job;
 use App\Repositories\BaseJobRepository;
-use App\Repositories\JobRepository;
-use App\Repositories\ORMJobRepository;
 use Illuminate\Http\Request;
 
 /**
  * @OA\Info(title="API", version="0.0.1")
  **/
-
 /**
  *  @OA\Server(
  *      url="http://myjobsearch/api/",
  *      description="L5 Swagger OpenApi Server"
  * )
  */
-
-
 class JobController extends Controller
 {
-
+    /**
+     * @var BaseJobRepository
+     */
     private $repo;
     public function __construct(BaseJobRepository $repo)
     {
@@ -111,7 +108,7 @@ class JobController extends Controller
      * 
      *     )
      */
-    public function show($id)
+    public function show(int $id)
     {
         return new JobsResources($this->repo->find($id));
     }
@@ -122,7 +119,7 @@ class JobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         //
     }
@@ -153,7 +150,7 @@ class JobController extends Controller
      * 
      *     )
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $job = $this->repo->find($id);
         $job->title = $request->has('title') ? $request->title : $job->title;
@@ -187,7 +184,7 @@ class JobController extends Controller
      *       ),
      *     )
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $job = $this->repo->find($id);
         $this->repo->delete($id);

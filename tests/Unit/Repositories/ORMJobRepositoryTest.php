@@ -10,6 +10,9 @@ use Tests\TestCase;
 class ORMJobRepositoryTest extends TestCase
 {
     use RefreshDatabase;
+    /**
+     * @var string
+     */
     private $table = 'jobs';
     /**
      * @var Job

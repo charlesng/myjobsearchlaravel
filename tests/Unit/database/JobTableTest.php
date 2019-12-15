@@ -3,9 +3,7 @@
 namespace Tests\Unit\database;
 
 use App\Job;
-use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class JobTableTest extends TestCase
@@ -14,22 +12,22 @@ class JobTableTest extends TestCase
     /**
      * A basic unit test example.
      *
-     * @return void
+     * @return array
      */
     private $jobs;
 
-    public function testIfJobDataSet()
+    public function testIfJobDataSet(): void
     {
         $this->givenJobsCreated();
         $this->thenJobIsCreated();
     }
 
-    private function givenJobsCreated()
+    private function givenJobsCreated(): void
     {
         $this->jobs = factory(Job::class, 1)->create();
     }
 
-    private function thenJobIsCreated()
+    private function thenJobIsCreated(): void
     {
         $this->assertDatabaseHas('jobs', [
             'title' => $this->jobs[0]->title
